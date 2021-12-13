@@ -11,6 +11,10 @@ Please check the following links to get more information about the Mod:
 
 For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
 
+```
+./gradlew genSource
+```
+
 ## Rebuild
 
 ```
