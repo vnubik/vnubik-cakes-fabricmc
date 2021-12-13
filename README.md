@@ -21,6 +21,35 @@ For setup instructions please see the [fabric wiki page](https://fabricmc.net/wi
 ./gradlew clean build
 ```
 
+## Release all supported Minecraft versions
+
+Check first that there are no uncommited changes. 
+```
+git status
+```
+
+Execute the script and find all jar files in `release` directory.
+```
+vnubik_version=1.0.1
+declare -a supported_mc_versions=( \
+ "1.15.2" \
+ "1.16.5" \
+ "1.17.1" \
+)
+
+rm -rf release && mkdir -p release \
+&& git checkout master \
+&& for supported_mc_version in "${supported_mc_versions[@]}"; do \
+  echo "=== About to process version: ${supported_mc_version} ==="; \
+  git checkout ${supported_mc_version} \
+  && ./gradlew clean build \
+  && cp build/libs/vnubik-cakes-${supported_mc_version}-${vnubik_version}.jar release/ \
+  && echo "=== Successfully processed version: ${supported_mc_version} ==="; \
+done \
+&& git checkout master \
+&& echo "Please find all the released versions in ./release directory ..."
+```
+
 ## License
 
 This mod is available under the MIT license. 
